@@ -19,14 +19,20 @@ class EmpresaController extends Controller
         return view('empresa.index', compact('empresas', 'tipo'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $tipo = $request->tipo;
+
+        if ($tipo != 'cliente' && $tipo != 'fornecedor') {
+            return abort(404);
+        }
+
+        return view('empresa.create', compact('tipo'));
     }
 
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     public function show($id)
