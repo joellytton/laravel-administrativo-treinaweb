@@ -1,9 +1,13 @@
 {
     "cSpell.ignoreWords": [
         "adminlte",
+        "documento",
+        "documentor",
         "laravel",
         "observacao",
         "razao",
-        "social"
+        "social",
+        "tipo",
+        "validacao"
     ]
 }

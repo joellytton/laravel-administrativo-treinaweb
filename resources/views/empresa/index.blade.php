@@ -39,7 +39,8 @@
                                 <td class="text-center">{{$empresa->nome_contato}}</td>
                                 <td class="text-center">{{$empresa->celular}}</td>
                                 <td class="text-center">
-                                    <a href="http://" class="btn btn-primary">Detalhes</a>
+                                    <a href="{{route('empresas.show', $empresa)}}" class="btn btn-primary">Detalhes</a>
+                                    <a href="{{route('empresas.edit', $empresa)}}" class="btn btn-info">Atualizar</a>
                                 </td>
                             </tr>
                             @endforeach

@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
 @section('title')
-<h1>Novo {{$tipo}}</h1>
+<h1>Editar {{$empresa->nome}}</h1>
 @endsection
 
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{route("empresas.index")}}?tipo={{$tipo}}">Listagem de {{$tipo}}</a></li>
-<li class="breadcrumb-item"><a href="{{route("empresas.create")}}?tipo={{$tipo}}">Novo {{$tipo}}</a></li>
+<li class="breadcrumb-item"><a href="{{route("empresas.index")}}?tipo={{$empresa->tipo}}">Listagem de
+        {{$empresa->tipo}}</a>
+</li>
 @endsection
 
 @section('content')
@@ -15,14 +16,12 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Entre com os dados</h3>
+                    <h3 class="card-title">Altere os dados necessarios </h3>
                 </div>
 
                 <div class="card-body">
-                    <form action="{{route("empresas.store")}}" method="post">
-
-                        <input type="hidden" name="tipo" value="{{$tipo}}">
-
+                    <form action="{{route("empresas.update", $empresa)}}" method="post">
+                        @method('PUT')
                         @include('empresa.form')
                     </form>
                 </div>

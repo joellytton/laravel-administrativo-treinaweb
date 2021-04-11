@@ -39,4 +39,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+//Js do tema
 require('../adminLTE/dist/js/adminlte');
+
+// plugin de mascara
+require('../adminLTE/plugins/jquery-mask/jquery.mask');
+
+// definição das mascaras
+
+require('./mascaras');

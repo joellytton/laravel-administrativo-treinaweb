@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmpresaRequest;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
 
@@ -30,28 +31,39 @@ class EmpresaController extends Controller
         return view('empresa.create', compact('tipo'));
     }
 
-    public function store(Request $request)
+    public function store(EmpresaRequest $request)
     {
-        dd($request->all());
+        $empresa  = Empresa::create($request->all());
+        return redirect()->route('empresas.show', $empresa);
     }
 
-    public function show($id)
+    public function show(Empresa $empresa)
     {
-        //
+        return view('empresa.show', compact('empresa'));
     }
 
-    public function edit($id)
+    public function edit(Empresa $empresa)
     {
-        //
+        return view('empresa.edit', compact('empresa'));
     }
 
-    public function update(Request $request, $id)
+    public function update(EmpresaRequest $request, Empresa $empresa)
     {
-        //
+        $empresa->update($request->all());
+
+        return redirect()->route('empresa.show', $empresa);
     }
 
-    public function destroy($id)
+    public function destroy(Empresa $empresa, Request $request)
     {
-        //
+        $tipo = $request->tipo;
+
+        if ($tipo != 'cliente' && $tipo != 'fornecedor') {
+            return abort(404);
+        }
+
+        $empresa->delete();
+
+        return redirect()->route('empresas.index', ['tipo' => $tipo]);
     }
 }
