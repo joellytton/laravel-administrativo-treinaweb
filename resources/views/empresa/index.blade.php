@@ -32,19 +32,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($empresas as $empresa)
+                            @forelse ($empresas as $empresa)
                             <tr>
                                 <td class="text-center">{{$empresa->id}}</td>
                                 <td class="text-center">{{$empresa->nome}}</td>
                                 <td class="text-center">{{$empresa->nome_contato}}</td>
-                                <td class="text-center">{{$empresa->celular}}</td>
+                                <td class="text-center">{{mascara($empresa->celular, '(##) #####-####')}}</td>
                                 <td class="text-center">
                                     <a href="{{route('empresas.show', $empresa)}}" class="btn btn-primary">Detalhes</a>
                                     <a href="{{route('empresas.edit', $empresa)}}" class="btn btn-info">Atualizar</a>
                                 </td>
                             </tr>
-                            @endforeach
-
+                            @empty
+                            <tr>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center">Nenhum registro cadastrado</td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

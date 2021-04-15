@@ -1,13 +1,29 @@
 {
     "cSpell.ignoreWords": [
         "adminlte",
+        "autoload",
+        "autoloader",
+        "classmap",
         "documento",
         "documentor",
+        "dont",
+        "faker",
+        "fakerphp",
+        "fideloper",
+        "guzzle",
+        "guzzlehttp",
+        "kennedytedesco",
         "laravel",
+        "maskara",
+        "maskared",
+        "nunomaduro",
         "observacao",
+        "optimize",
+        "phpunit",
         "razao",
         "social",
         "tipo",
-        "validacao"
+        "validacao",
+        "validation"
     ]
 }

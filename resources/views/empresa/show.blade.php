@@ -29,7 +29,15 @@
                         <div class="col-sm-6">
                             <strong>Razão Social</strong>: {{$empresa->razao_social}} <br>
 
-                            <strong>Documento</strong>: {{$empresa->documento}} <br>
+                            <strong>Documento</strong>:
+                            @if (strlen($empresa->documento) === 11)
+                            {{mascara($empresa->documento, '###.###.###-##')}}
+
+                            @else
+                            {{mascara($empresa->documento, '###.###.###/####-##')}}
+
+                            @endif
+                            <br>
 
                             <strong>IE/RG</strong>: {{$empresa->ie_rg}} <br>
 
@@ -39,11 +47,12 @@
                         <div class="col-sm-6">
                             <address>
                                 {{$empresa->logradouro}}, {{$empresa->bairro}} <br>
-                                {{$empresa->cidade}} - {{$empresa->estado}} - {{$empresa->cep}} <br>
+                                {{$empresa->cidade}} - {{$empresa->estado}} - {{mascara($empresa->cep, '#####-###')}}
+                                <br>
                                 <strong>Nome Contato:</strong> {{$empresa->nome_contato}} <br>
-                                <strong>Celular:</strong> {{$empresa->celular}} <br>
+                                <strong>Celular:</strong> {{mascara($empresa->celular, '(##) #####-####')}} <br>
                                 <strong>Email:</strong> {{$empresa->email}} <br>
-                                <strong>Telefone:</strong> {{$empresa->telefone}} <br>
+                                <strong>Telefone:</strong> {{mascara($empresa->telefone, '(##) ####-####')}} <br>
                             </address>
                         </div>
                     </div>
