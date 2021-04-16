@@ -7,6 +7,7 @@ use App\Http\Requests;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -45,6 +46,7 @@ class UsersController extends Controller
             'password' => 'required|string|min:8|confirmed'
         ]);
         $requestData = $request->all();
+        $requestData['password'] = Hash::make($requestData['password']);
 
         User::create($requestData);
 
@@ -69,10 +71,11 @@ class UsersController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:8|confirmed'
         ]);
         $requestData = $request->all();
+        $requestData['password'] = Hash::make($requestData['password']);
 
         $user = User::findOrFail($id);
         $user->update($requestData);
