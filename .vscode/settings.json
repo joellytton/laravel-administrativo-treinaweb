@@ -4,6 +4,7 @@
         "autoload",
         "autoloader",
         "classmap",
+        "descricao",
         "documento",
         "documentor",
         "dont",
