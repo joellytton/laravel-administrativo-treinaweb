@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Movimentos_financeiro extends Model
+class MovimentosFinanceiro extends Model
 {
     /**
      * The database table used by the model.
@@ -14,10 +14,10 @@ class Movimentos_financeiro extends Model
     protected $table = 'movimentos_financeiros';
 
     /**
-    * The database primary key value.
-    *
-    * @var string
-    */
+     * The database primary key value.
+     *
+     * @var string
+     */
     protected $primaryKey = 'id';
 
     /**
@@ -31,5 +31,4 @@ class Movimentos_financeiro extends Model
     {
         return $this->belongsTo('App\Models\Empresa');
     }
-    
 }
