@@ -4,6 +4,7 @@
         "autoload",
         "autoloader",
         "classmap",
+        "csrf",
         "descricao",
         "documento",
         "documentor",
@@ -11,6 +12,7 @@
         "faker",
         "fakerphp",
         "fideloper",
+        "fontawesome",
         "guzzle",
         "guzzlehttp",
         "joellytton",
@@ -24,9 +26,12 @@
         "optimize",
         "phpunit",
         "razao",
+        "relatorio",
+        "relatorios",
         "social",
         "tipo",
         "validacao",
-        "validation"
+        "validation",
+        "xsrf"
     ]
 }

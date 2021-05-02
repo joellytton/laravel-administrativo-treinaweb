@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('title')
-<h1>Listagem Movimentos Financeiros</h1>
+<h1>Relatório de Saldo Empresa {{ $empresa->nome }}</h1>
 @endsection
 
 @section('breadcrumb')
 <li class="breadcrumb-item">
-    <a href="{{ url('/movimentos_financeiros') }}">Listagem Movimentos Financeiros</a>
+    <a href="{{ url('/') }}">Relatório de Saldo</a>
 </li>
 @endsection
 
@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Movimentos Financeiros</div>
+                <div class="card-header">Movimentações</div>
                 <div class="card-body">
                     <form method="GET">
                         <div class="row">
@@ -54,52 +54,46 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Tipo</th>
-                                    <th>Empresa</th>
-                                    <th>Descricao</th>
-                                    <th>Valor</th>
                                     <th>Data</th>
-                                    <th>Ações</th>
+                                    <th>Movimento</th>
+                                    <th>Tipo</th>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor Un.</th>
+                                    <th>Total</th>
+                                    <th>Saldo</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($movimentoFinanceiro as $item)
+                                @foreach($saldo as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td><span
-                                            class="badge badge-{{ $item->tipo === 'entrada' ? 'success' : 'danger' }}">{{ ucfirst($item->tipo) }}</span>
-                                    </td>
-                                    <td>{{ $item->empresa->nome }} ({{ $item->empresa->razao_social }})</td>
-                                    <td>{{ $item->descricao }}</td>
-                                    <td>R$ {{ numero_iso_para_br($item->valor) }}</td>
                                     <td>{{ data_iso_para_br($item->created_at) }}</td>
-                                    <td>
-                                        <a href="{{ url('/movimentos_financeiros/' . $item->id) }}"
-                                            title="View Movimentos_financeiro"><button class="btn btn-info btn-sm"><i
-                                                    class="fa fa-eye" aria-hidden="true"></i> Detalhes</button></a>
 
-                                        <form method="POST"
-                                            action="{{ url('/movimentos_financeiros' . '/' . $item->id) }}"
-                                            accept-charset="UTF-8" style="display:inline">
-                                            {{ method_field('DELETE') }}
-                                            {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                title="Delete Movimentos_financeiro"
-                                                onclick="return confirm(&quot;Confirm delete?&quot;)"><i
-                                                    class="fa fa-trash-o" aria-hidden="true"></i> Apagar</button>
-                                        </form>
+                                    @if ($item->movimento_type === 'App\Models\MovimentosEstoque')
+                                    <td>estoque</td>
+                                    <td>{{ $item->movimento->tipo }}</td>
+                                    <td>{{ $item->movimento->produto->nome }}</td>
+                                    <td>{{ numero_iso_para_br($item->movimento->quantidade) }}</td>
+                                    <td>R$ {{ numero_iso_para_br($item->movimento->valor) }}</td>
+                                    <td>R$
+                                        {{ numero_iso_para_br($item->movimento->quantidade * $item->movimento->valor) }}
                                     </td>
+                                    <td>R$ {{ numero_iso_para_br($item->valor) }}</td>
+                                    @else
+                                    <td>Financeiro</td>
+                                    <td>{{ $item->movimento->tipo }}</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>R$ {{ numero_iso_para_br($item->movimento->valor) }}</td>
+                                    <td>R$ {{ numero_iso_para_br($item->valor) }}</td>
+                                    @endif
+
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        <a href="{{ url('/movimentos_financeiros/create') }}" class="btn btn-success btn-sm"
-                            title="Novo Movimentos_financeiro">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Novo
-                        </a>
-                        <div class="pagination-wrapper"> {!! $movimentoFinanceiro->appends(['search' =>
-                            Request::get('search')])->render() !!} </div>
+
                     </div>
 
                 </div>

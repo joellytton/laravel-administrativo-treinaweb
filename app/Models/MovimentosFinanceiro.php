@@ -31,4 +31,16 @@ class MovimentosFinanceiro extends Model
     {
         return $this->belongsTo('App\Models\Empresa');
     }
+
+    public function saldo()
+    {
+        return $this->MorphOne('App\Models\Saldo', 'movimento');
+    }
+
+    public static function buscaPorIntervalo(string $dataInicio, string $dataFim, int $quantidade = 20)
+    {
+        return self::whereBetween('created_at', [$dataInicio, $dataFim])
+        ->with('empresa')
+        ->paginate($quantidade);
+    }
 }

@@ -10,7 +10,7 @@
     </li>
 
     <li class="breadcrumb-item">
-        <a href="{{ url('/movimentos_financeiros/' . $movimentos_financeiro->id . '/edit') }}">Editar Movimentos_financeiro</a>
+        <a href="{{ url('/movimentos_financeiros/' . $movimentofinanceiro->id . '/edit') }}">Editar Movimentos_financeiro</a>
     </li>
 @endsection
 
@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Editar Movimentos_financeiro #{{ $movimentos_financeiro->id }}</div>
+                    <div class="card-header">Editar Movimentos_financeiro #{{ $movimentofinanceiro->id }}</div>
                     <div class="card-body">
                         <a href="{{ url('/movimentos_financeiros') }}" title="Voltar"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar</button></a>
                         <br />
@@ -33,7 +33,7 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/movimentos_financeiros/' . $movimentos_financeiro->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form method="POST" action="{{ url('/movimentos_financeiros/' . $movimentofinanceiro->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
 

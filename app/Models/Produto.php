@@ -16,17 +16,21 @@ class Produto extends Model
      */
     protected $table = 'produtos';
 
-    /**
-    * The database primary key value.
-    *
-    * @var string
-    */
+    protected $appends = ['text'];
+
     protected $primaryKey = 'id';
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
     protected $fillable = ['nome', 'descricao'];
+
+    public static function buscarPorNome(string $nome)
+    {
+        $nome = '%' . $nome . '%';
+
+        return self::where('nome', 'LIKE', $nome)->get();
+    }
+
+    public function getTextAttribute(): string
+    {
+        return $this->attributes['nome'];
+    }
 }
