@@ -40,7 +40,15 @@ class MovimentosFinanceiro extends Model
     public static function buscaPorIntervalo(string $dataInicio, string $dataFim, int $quantidade = 20)
     {
         return self::whereBetween('created_at', [$dataInicio, $dataFim])
-        ->with('empresa')
-        ->paginate($quantidade);
+            ->with('empresa')
+            ->paginate($quantidade);
+    }
+
+    public static function porIdComEmpresaExcluida(int $id)
+    {
+        return self::with(['empresa' => function ($q) {
+            $q->withTrashed();
+        }])
+            ->findOrFail($id);
     }
 }

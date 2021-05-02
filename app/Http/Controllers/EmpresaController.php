@@ -14,10 +14,12 @@ class EmpresaController extends Controller
     public function index(Request $request): View
     {
         $tipo = $request->tipo;
-
         $this->validaTipo($tipo);
 
-        $empresas = Empresa::todasPorTipo($tipo);
+        $busca = $request->search ?? '';
+
+        $empresas = Empresa::todasPorTipo($tipo, $busca);
+
         return view('empresa.index', compact('empresas', 'tipo'));
     }
 
